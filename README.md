@@ -49,7 +49,7 @@ cd plant-care
 
 For backend (.env):
 ```bash
-MONGODB_URI=mongodb://mongodb:27017/plant-care
+MONGODB_URI=mongodb://root:example@mongodb:27017/plant-care?authSource=admin
 JWT_SECRET=your-secret-key-here
 PORT=8000
 NODE_ENV=development
@@ -110,19 +110,71 @@ plant-care/
 └── README.md            # Project documentation
 ```
 
-## 🔒 Environment Variables
+## 🔒 Environment Setup
 
-### Backend Variables
-- `MONGODB_URI`: MongoDB connection string
+1. Copy the example environment files:
+
+```bash
+# Backend
+cp backend/.env.example backend/.env
+
+# Frontend
+cp frontend/.env.example frontend/.env
+```
+
+2. Configure environment variables:
+
+### Backend Variables (.env)
+```bash
+# Server Configuration
+PORT=8000
+NODE_ENV=development
+
+# MongoDB Configuration
+MONGODB_URI=mongodb://root:example@mongodb:27017/plant-care?authSource=admin
+
+# Authentication
+JWT_SECRET=your-secret-key-here
+JWT_EXPIRES_IN=7d
+
+# API Configuration
+API_PREFIX=/api
+CORS_ORIGIN=http://localhost:3000
+```
+
+### Frontend Variables (.env)
+```bash
+# API Configuration
+REACT_APP_API_URL=http://localhost:8000/api
+
+# Development Settings
+NODE_ENV=development
+WDS_SOCKET_HOST=localhost
+WDS_SOCKET_PORT=3000
+WATCHPACK_POLLING=true
+FAST_REFRESH=false
+```
+
+> **Note**: Never commit actual `.env` files to version control. The `.env.example` files serve as templates.
+
+### Environment Variables Explanation
+
+#### Backend
+- `PORT`: Server listening port
+- `NODE_ENV`: Application environment (development/production)
+- `MONGODB_URI`: MongoDB connection string with authentication
 - `JWT_SECRET`: Secret key for JWT token generation
-- `PORT`: Server port (default: 8000)
-- `NODE_ENV`: Environment mode (development/production)
+- `JWT_EXPIRES_IN`: JWT token expiration time
+- `API_PREFIX`: Prefix for all API routes
+- `CORS_ORIGIN`: Allowed origin for CORS
 
-### Frontend Variables
-- `REACT_APP_API_URL`: Backend API URL
-- `NODE_ENV`: Environment mode
-- `WDS_SOCKET_HOST`: WebSocket host for development
-- `WDS_SOCKET_PORT`: WebSocket port for development
+#### Frontend
+- `REACT_APP_API_URL`: Backend API endpoint
+- `NODE_ENV`: Application environment
+- `WDS_SOCKET_HOST`: WebSocket host for hot reloading
+- `WDS_SOCKET_PORT`: WebSocket port for hot reloading
+- `WATCHPACK_POLLING`: Enable file watching in Docker
+- `FAST_REFRESH`: React refresh setting
 
 ## 🤝 Contributing
 
