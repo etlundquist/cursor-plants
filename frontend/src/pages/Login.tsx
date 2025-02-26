@@ -9,6 +9,7 @@ import {
   Link,
   Box,
 } from '@mui/material';
+import { LocalFlorist } from '@mui/icons-material';
 import { useAuth } from '../contexts/AuthContext';
 
 const Login: React.FC = () => {
@@ -48,9 +49,25 @@ const Login: React.FC = () => {
             width: '100%',
           }}
         >
-          <Typography component="h1" variant="h5">
-            Plant Care Login
-          </Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              mb: 3,
+            }}
+          >
+            <LocalFlorist
+              sx={{
+                fontSize: 64,
+                color: 'primary.main',
+                mb: 2,
+              }}
+            />
+            <Typography component="h1" variant="h5">
+              The Flora Project
+            </Typography>
+          </Box>
           {error && (
             <Typography color="error" sx={{ mt: 2 }}>
               {error}

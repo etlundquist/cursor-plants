@@ -52,7 +52,7 @@ services:
     volumes:
       - mongodb_data:/data/db
     restart: unless-stopped
-    command: mongod --wiredTigerCacheSizeGB 0.5 --journalOptions=minimumSizeGB=0.5
+    command: mongod
     environment:
       - MONGODB_INITDB_ROOT_USERNAME=root
       - MONGODB_INITDB_ROOT_PASSWORD=example

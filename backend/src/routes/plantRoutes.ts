@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import Plant, { IPlant } from '../models/Plant';
 import auth from '../middleware/auth';
+import { getPlantInfo } from '../services/plantInfo';
 
 const router = express.Router();
 
@@ -77,6 +78,16 @@ router.delete('/:id', auth, async (req: AuthRequest, res: Response): Promise<voi
     res.json({ message: 'Plant deleted successfully' });
   } catch (error) {
     res.status(500).json({ error: 'Error deleting plant' });
+  }
+});
+
+// Get plant species information
+router.get('/species/:name', auth, async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const plantInfo = await getPlantInfo(req.params.name);
+    res.json(plantInfo);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching plant information' });
   }
 });
 

@@ -16,6 +16,7 @@ import { Add as AddIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui/ico
 import { DatePicker } from '@mui/x-date-pickers';
 import axios from 'axios';
 import Layout from '../components/Layout';
+import PlantDetails from '../components/PlantDetails';
 
 interface Plant {
   _id: string;
@@ -143,7 +144,7 @@ const Plants: React.FC = () => {
           </Grid>
           {plants.map((plant) => (
             <Grid item xs={12} sm={6} md={4} key={plant._id}>
-              <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+              <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                   <div>
                     <Typography variant="h6">{plant.name}</Typography>
@@ -158,7 +159,7 @@ const Plants: React.FC = () => {
                     </IconButton>
                   </div>
                 </div>
-                <Typography variant="body2" sx={{ mt: 1 }}>
+                <Typography variant="body2">
                   Location: {plant.location}
                 </Typography>
                 <Typography variant="body2">
@@ -168,10 +169,11 @@ const Plants: React.FC = () => {
                   Fertilize every {plant.fertilizingFrequency} days
                 </Typography>
                 {plant.notes && (
-                  <Typography variant="body2" sx={{ mt: 1 }}>
+                  <Typography variant="body2">
                     Notes: {plant.notes}
                   </Typography>
                 )}
+                <PlantDetails species={plant.species} />
               </Paper>
             </Grid>
           ))}
